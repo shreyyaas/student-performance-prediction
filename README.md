@@ -4,9 +4,8 @@ Predicting student academic outcomes using ensemble machine learning methods.
 
 ## Team
 - Member 1 — EDA & Preprocessing
-- Member 2 — Feature Engineering
-- Member 3 — Model Building
-- Member 4 — Evaluation & Report
+- Member 2 — Feature Engineering & evaluation
+- Member 3 — Model Building & report
 
 ## Tech Stack
 Python, scikit-learn, XGBoost, SHAP, pandas, matplotlib
