@@ -20,7 +20,6 @@ Python, scikit-learn, XGBoost, SHAP, pandas, matplotlib
 - XGBoost
 
 ## Results
-## Results
 
 | Model | Accuracy | F1 Score |
 |---|---|---|
