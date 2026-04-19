@@ -6,7 +6,6 @@ Predicting student academic outcomes using ensemble machine learning — built a
 
 ## 📌 Project Overview
 
-This project tackles the question:
 > *"Can we predict how a student will perform academically based on their lifestyle, background, and family factors — before their results are out?"*
 
 We built two versions of the prediction system:
@@ -22,9 +21,9 @@ We built two versions of the prediction system:
 
 | Member | Role |
 |---|---|
-| Shreyas S A | EDA, Preprocessing & Web App |
-| Shreyas Shashidhar Pai | Model Building & Tuning |
-| Suhas J | Evaluation & Visualization |
+| Shreyas (PES1UG23EC291) | EDA, Preprocessing & Web App |
+| Member 2 | Model Building & Tuning |
+| Member 3 | Evaluation & Visualization |
 
 ---
 
@@ -74,16 +73,18 @@ student-performance-prediction/
 
 **UCI Student Performance Dataset**
 - 395 students, 33 features
-- Features include: study time, absences, parental education, alcohol consumption, family support, and more
+- Features: study time, absences, parental education, alcohol use, family support, and more
+- Target: Final grade G3 (0–20 scale)
 - Source: [UCI ML Repository](https://archive.ics.uci.edu/dataset/320/student+performance)
 
 ---
 
 ## ⚙️ Tech Stack
 
-- **Python** — pandas, numpy, scikit-learn, xgboost, matplotlib, seaborn, shap, gradio
-- **Environment** — Google Colab
-- **Models** — Logistic Regression, Random Forest, Gradient Boosting, XGBoost
+- **Language:** Python
+- **Libraries:** pandas, numpy, scikit-learn, xgboost, matplotlib, seaborn, shap, gradio
+- **Environment:** Google Colab
+- **Models:** Logistic Regression, Random Forest, Gradient Boosting, XGBoost
 
 ---
 
@@ -91,8 +92,13 @@ student-performance-prediction/
 
 ### Target Variable
 ```
-G3 >= 10 → Pass (1)
-G3 <  10 → Fail (0)
+G3 >= 10  →  Pass  (1)
+G3 <  10  →  Fail  (0)
+```
+
+### Pipeline
+```
+Raw Data → EDA → Preprocessing → Model Training (GridSearchCV) → Evaluation + SHAP → Web App
 ```
 
 ### Results
@@ -110,28 +116,34 @@ G3 <  10 → Fail (0)
 3. **`goout`** — Frequency of going out with friends negatively impacts performance
 
 ### Visualizations
+
 | Confusion Matrices | ROC-AUC Curves |
 |---|---|
-| ![confusion](outputs/figures/confusion_matrices.png) | ![roc](outputs/figures/roc_auc_curves.png) |
+| ![confusion](v1-binary/figures/confusion_matrices.png) | ![roc](v1-binary/figures/roc_auc_curves.png) |
 
-| Model Comparison | SHAP Importance |
+| Model Comparison | SHAP Feature Importance |
 |---|---|
-| ![comparison](outputs/figures/model_comparison.png) | ![shap](outputs/figures/shap_importance_bar.png) |
+| ![comparison](v1-binary/figures/model_comparison.png) | ![shap](v1-binary/figures/shap_importance_bar.png) |
 
 ---
 
 ## 🟢 Version 2 — Letter Grade Prediction (A / B / C / D / E / F)
 
-An extended version that predicts the exact letter grade instead of just pass/fail — useful for identifying where an average student lands and what they need to improve.
+An extended version predicting the exact letter grade — useful for identifying where an average student lands and what they need to improve to reach the next grade.
 
 ### Grade Scale
 ```
-18–20 → A (Excellent)
-15–17 → B (Good)
-12–14 → C (Satisfactory)
-10–11 → D (Sufficient)
- 8– 9 → E (Poor)
- 0– 7 → F (Fail)
+18–20  →  A  (Excellent)
+15–17  →  B  (Good)
+12–14  →  C  (Satisfactory)
+10–11  →  D  (Sufficient)
+ 8– 9  →  E  (Poor)
+ 0– 7  →  F  (Fail)
+```
+
+### Pipeline
+```
+Raw Data → EDA → Grade Mapping → Preprocessing → Multi-class Training → Per-Grade Evaluation + SHAP → Web App
 ```
 
 ### Results
@@ -143,71 +155,75 @@ An extended version that predicts the exact letter grade instead of just pass/fa
 | Logistic Regression | 27.9% | 0.282 |
 | Random Forest | 27.9% | 0.241 |
 
-> **Note on accuracy:** For a 6-class problem, random guessing yields ~16.7%. Our best model at 32.9% is approximately 2× better than chance. The modest absolute score reflects the inherent difficulty of fine-grained grade prediction using only lifestyle and demographic features — not academic performance data.
+> **Note on accuracy:** Random guessing across 6 classes yields ~16.7%. Our best model at 32.9% is approximately **2× better than chance**. The modest absolute score reflects the difficulty of fine-grained grade prediction from lifestyle features alone — factors like actual exam effort and teaching quality are not captured in this dataset.
 
 ### Key Findings (SHAP Analysis)
-1. **`absences`** — Becomes the #1 predictor in grade prediction (overtakes failures from v1)
-2. **`failures`** — Still a strong second predictor
-3. **`Medu`** — Mother's education level has meaningful impact on grade level
+1. **`absences`** — Becomes the #1 predictor in grade prediction, overtaking failures from v1
+2. **`failures`** — Remains a strong second predictor
+3. **`Medu`** — Mother's education level has meaningful impact on grade attainment
 
-### New in v2
+### What's New in v2
+- 6-class multi-class classification with `weighted` F1 scoring
 - Per-grade F1 heatmap showing which grades each model predicts best
-- Live grade predictor web app with improvement suggestions per grade
+- Live grade predictor web app with tailored improvement suggestions per grade
 
 ### Visualizations
+
 | Confusion Matrices | Model Comparison |
 |---|---|
-| ![confusion_v2](outputs/figures/confusion_matrices_v2.png) | ![comparison_v2](outputs/figures/model_comparison_v2.png) |
+| ![confusion_v2](v2-grade-prediction/figures/confusion_matrices_v2.png) | ![comparison_v2](v2-grade-prediction/figures/model_comparison_v2.png) |
 
-| F1 Per Grade Heatmap | SHAP Importance |
+| F1 Per Grade Heatmap | SHAP Feature Importance |
 |---|---|
-| ![f1_heatmap](outputs/figures/f1_per_grade_heatmap.png) | ![shap_v2](outputs/figures/shap_importance_v2.png) |
+| ![f1_heatmap](v2-grade-prediction/figures/f1_per_grade_heatmap.png) | ![shap_v2](v2-grade-prediction/figures/shap_importance_v2.png) |
 
 ---
 
 ## 🌐 Web App Demo
 
-Both versions include a live Gradio web app:
-- **v1 app** — Enter student details → predicts **Pass or Fail** with confidence %
-- **v2 app** — Enter student details → predicts **letter grade (A–F)** with confidence % per grade + improvement suggestion
+Both versions include a live Gradio web app runnable directly in Google Colab:
 
-To run either app, open the corresponding notebook in Google Colab, upload the required `.pkl` files, and run all cells. A public link valid for 72 hours will be generated.
+| App | Notebook | Output |
+|---|---|---|
+| v1 Pass/Fail Predictor | `v1-binary/notebooks/04_predictor_app.ipynb` | Pass / Fail + confidence % |
+| v2 Grade Predictor | `v2-grade-prediction/notebooks/v2_04_grade_predictor_app.ipynb` | Letter grade + per-grade confidence + improvement tip |
+
+To run: open the notebook in Colab, upload the required `.pkl` files, run all cells. A public shareable link valid for 72 hours will be generated automatically.
 
 ---
 
 ## 🚀 How to Run
 
-### Prerequisites
+### Install dependencies
 ```bash
 pip install pandas numpy scikit-learn xgboost matplotlib seaborn shap gradio jupyter
 ```
 
-### Execution Order
+### Execution order (same for both v1 and v2)
 ```
-Notebook 1 → produces processed CSVs
+Notebook 1  →  EDA + preprocessing  →  produces processed CSVs
      ↓
-Notebook 2 → trains models, produces .pkl files
+Notebook 2  →  model training        →  produces .pkl model files
      ↓
-Notebook 3 → evaluation plots
+Notebook 3  →  evaluation + plots    →  produces figures
      ↓
-Notebook 4 → web app (upload pkl + csv from notebooks 1 & 2)
+Notebook 4  →  web app               →  upload pkl + csv from notebooks 1 & 2
 ```
-
-Run v1 notebooks first, then repeat with v2 notebooks.
 
 ---
 
-## 📊 Comparison: v1 vs v2
+## 📊 v1 vs v2 — Side by Side
 
 | Aspect | v1 (Binary) | v2 (Multi-class) |
 |---|---|---|
 | Task | Pass / Fail | A / B / C / D / E / F |
 | Classes | 2 | 6 |
+| Best Model | Random Forest | XGBoost |
 | Best Accuracy | 68.4% | 32.9% |
 | Best F1 | 0.797 | 0.323 |
-| Random Baseline | 50% | 16.7% |
-| Improvement over random | +18.4% | +16.2% |
-| Top Feature | failures | absences |
+| Random Baseline | 50.0% | 16.7% |
+| Lift over random | +18.4% | +16.2% |
+| Top Feature (SHAP) | failures | absences |
 
 ---
 
