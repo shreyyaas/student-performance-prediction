@@ -20,4 +20,14 @@ Python, scikit-learn, XGBoost, SHAP, pandas, matplotlib
 - XGBoost
 
 ## Results
-*(To be updated after evaluation)*
+## Results
+
+| Model | Accuracy | F1 Score |
+|---|---|---|
+| Random Forest | 68.4% | 0.797 |
+| XGBoost | 68.4% | 0.786 |
+| Logistic Regression | 63.3% | 0.739 |
+| Gradient Boosting | 55.7% | 0.660 |
+
+**Best Model:** Random Forest (F1 = 0.797)
+**Key Finding:** Past failures and absences are the strongest predictors of student performance.
