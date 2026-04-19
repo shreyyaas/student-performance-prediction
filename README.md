@@ -33,34 +33,39 @@ We built two versions of the prediction system:
 ```
 student-performance-prediction/
 │
-├── data/
-│   ├── raw/                        # Original UCI dataset
-│   └── processed/                  # Cleaned, encoded, scaled CSVs
-│       ├── X_train.csv             # v1 training features
-│       ├── X_test.csv              # v1 test features
-│       ├── y_train.csv             # v1 training labels (pass/fail)
-│       ├── y_test.csv              # v1 test labels
-│       ├── results_summary.csv     # v1 model results
-│       ├── X_train_v2.csv          # v2 training features
-│       ├── X_test_v2.csv           # v2 test features
-│       ├── y_train_v2.csv          # v2 training labels (A-F)
-│       ├── y_test_v2.csv           # v2 test labels
-│       └── results_summary_v2.csv  # v2 model results
+├── v1-binary/
+│   ├── notebooks/
+│   │   ├── 01_eda_preprocessing.ipynb
+│   │   ├── 02_models.ipynb
+│   │   ├── 03_evaluation.ipynb
+│   │   └── 04_predictor_app.ipynb
+│   ├── data/processed/
+│   │   ├── X_train.csv, X_test.csv
+│   │   ├── y_train.csv, y_test.csv
+│   │   └── results_summary.csv
+│   └── figures/
+│       ├── confusion_matrices.png
+│       ├── roc_auc_curves.png
+│       ├── model_comparison.png
+│       └── shap_importance_bar.png
 │
-├── notebooks/
-│   ├── 01_eda_preprocessing.ipynb  # v1: EDA + preprocessing
-│   ├── 02_models.ipynb             # v1: Model training + tuning
-│   ├── 03_evaluation.ipynb         # v1: Evaluation + SHAP
-│   ├── 04_predictor_app.ipynb      # v1: Pass/Fail web app
-│   └── v2/
-│       ├── v2_01_eda_preprocessing.ipynb  # v2: EDA + grade target
-│       ├── v2_02_models.ipynb             # v2: Multi-class models
-│       ├── v2_03_evaluation.ipynb         # v2: Per-grade evaluation
-│       └── v2_04_grade_predictor_app.ipynb # v2: Grade predictor web app
+├── v2-grade-prediction/
+│   ├── notebooks/
+│   │   ├── v2_01_eda_preprocessing.ipynb
+│   │   ├── v2_02_models.ipynb
+│   │   ├── v2_03_evaluation.ipynb
+│   │   └── v2_04_grade_predictor_app.ipynb
+│   ├── data/processed/
+│   │   ├── X_train_v2.csv, X_test_v2.csv
+│   │   ├── y_train_v2.csv, y_test_v2.csv
+│   │   └── results_summary_v2.csv
+│   └── figures/
+│       ├── confusion_matrices_v2.png
+│       ├── model_comparison_v2.png
+│       ├── f1_per_grade_heatmap.png
+│       └── shap_importance_v2.png
 │
-└── outputs/
-    ├── figures/                    # All plots and visualizations
-    └── models/                     # Saved .pkl model files
+└── README.md
 ```
 
 ---
