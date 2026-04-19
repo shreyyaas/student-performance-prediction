@@ -22,9 +22,9 @@ We built two versions of the prediction system:
 
 | Member | Role |
 |---|---|
-| Shreyas (PES1UG23EC291) | EDA, Preprocessing & Web App |
-| Member 2 | Model Building & Tuning |
-| Member 3 | Evaluation & Visualization |
+| Shreyas S A | EDA, Preprocessing & Web App |
+| Shreyas Shashidhar Pai | Model Building & Tuning |
+| Suhas J | Evaluation & Visualization |
 
 ---
 
